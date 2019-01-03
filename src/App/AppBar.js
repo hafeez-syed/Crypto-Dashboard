@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { AppContext } from "./AppProvider";
 import { toProperCase } from "../utils";
 
 const Bar = styled.div`
@@ -21,11 +22,18 @@ const ControlButtonElement = styled.div`
     `}
 `;
 
-function ControlButton({ name, active }) {
+function ControlButton({ name }) {
   return (
-    <ControlButtonElement active={active}>
-      {toProperCase(name)}
-    </ControlButtonElement>
+    <AppContext.Consumer>
+      {({ page, setPage }) => (
+        <ControlButtonElement
+          active={page === name}
+          onClick={() => setPage(name)}
+        >
+          {toProperCase(name)}
+        </ControlButtonElement>
+      )}
+    </AppContext.Consumer>
   );
 }
 
@@ -34,7 +42,7 @@ const AppBar = () => {
     <Bar>
       <Logo>CryptoDash</Logo>
       <div />
-      <ControlButton active name={"dashboard"} />
+      <ControlButton name={"dashboard"} />
       <ControlButton name={"settings"} />
     </Bar>
   );

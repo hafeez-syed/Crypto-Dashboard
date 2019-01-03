@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import AppLayout, { StyledPage, theme, GlobalStyle } from "./AppLayout";
+import { ThemeProvider } from "styled-components";
+import { StyledPage, theme, GlobalStyle } from "./AppLayout";
 
 import AppBar from "./AppBar";
 import Welcome from "./Welcome";
+import AppProvider from "./AppProvider";
 
 class App extends Component {
   render() {
@@ -11,8 +12,10 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <StyledPage>
           <GlobalStyle />
-          <AppBar />
-          <Welcome />
+          <AppProvider>
+            <AppBar />
+            <Welcome />
+          </AppProvider>
         </StyledPage>
       </ThemeProvider>
     );
