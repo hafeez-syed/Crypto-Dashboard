@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { StyledPage, theme, GlobalStyle } from "./AppLayout";
 
 import AppBar from "./AppBar";
-import Welcome from "./Welcome";
+import Settings from "../Settings";
 import AppProvider from "./AppProvider";
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
           <GlobalStyle />
           <AppProvider>
             <AppBar />
-            <Welcome />
+            <Settings />
           </AppProvider>
         </StyledPage>
       </ThemeProvider>
