@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { AppContext } from "../App/AppProvider";
 import CoinTile from "../Settings/CoinTile";
 
@@ -11,15 +11,16 @@ export const CoinGridStyled = styled.div`
 `;
 
 // Get first 100 coins
-const getCoinsToDisplay = coinList => Object.keys(coinList).slice(0, 100);
+const getCoinsToDisplay = (coinList, topSection) =>
+  Object.keys(coinList).slice(0, topSection ? 10 : 100);
 
-const CoinGrid = props => {
+const CoinGrid = ({ topSection }) => {
   return (
     <AppContext.Consumer>
       {({ coinList }) => (
         <CoinGridStyled>
-          {getCoinsToDisplay(coinList).map(coinKey => (
-            <CoinTile key={coinKey} coinKey={coinKey} />
+          {getCoinsToDisplay(coinList, topSection).map(coinKey => (
+            <CoinTile topSection={topSection} key={coinKey} coinKey={coinKey} />
           ))}
         </CoinGridStyled>
       )}

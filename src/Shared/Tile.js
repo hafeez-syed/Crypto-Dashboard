@@ -18,3 +18,15 @@ export const SelectableTile = styled(Tile)`
     cursor: pointer;
   }
 `;
+
+export const DeletableTile = styled(SelectableTile)`
+  &:hover {
+    ${redBoxShadow};
+    cursor: pointer;
+  }
+`;
+
+export const DisableTile = styled(Tile)`
+  pointer-events: none;
+  opacity: 0.4;
+`;
