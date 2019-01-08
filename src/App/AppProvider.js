@@ -11,13 +11,15 @@ class AppProvider extends Component {
 
     this.state = {
       page: "dashboard",
+      coinList: [],
       favourites: ["BTC", "ETH", "XRP", "EOS", "DOGE"],
       ...this.savedSettings(),
       setPage: this.setPage,
       addCoin: this.addCoin,
       confirmFavourites: this.confirmFavourites,
       removeCoin: this.removeCoin,
-      isCoinInFavourites: this.isCoinInFavourites
+      isCoinInFavourites: this.isCoinInFavourites,
+      setFilteredCoins: this.setFilteredCoins
     };
   }
 
@@ -71,6 +73,9 @@ class AppProvider extends Component {
   };
 
   setPage = pageName => this.setState({ page: pageName });
+
+  setFilteredCoins = filteredCoins => this.setState({ filteredCoins });
+
   render() {
     return (
       <AppContext.Provider value={this.state}>
