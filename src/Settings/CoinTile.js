@@ -13,11 +13,13 @@ const CoinTile = ({ coinKey, topSection }) => {
     <AppContext.Consumer>
       {({ coinList, addCoin, removeCoin, isCoinInFavourites }) => {
         let coin = coinList[coinKey];
+
         const TileClass = topSection
           ? DeletableTile
           : isCoinInFavourites(coinKey)
           ? DisableTile
           : SelectableTile;
+
         return (
           <TileClass
             onClick={() =>
