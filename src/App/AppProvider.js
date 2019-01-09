@@ -18,7 +18,8 @@ class AppProvider extends Component {
       confirmFavourites: this.confirmFavourites,
       removeCoin: this.removeCoin,
       isCoinInFavourites: this.isCoinInFavourites,
-      setFilteredCoins: this.setFilteredCoins
+      setFilteredCoins: this.setFilteredCoins,
+      setCurrentFavourite: this.setCurrentFavourite
     };
   }
 
@@ -74,10 +75,13 @@ class AppProvider extends Component {
   };
 
   confirmFavourites = () => {
+    let currentFavourite = this.state.favourites[0];
+
     this.setState(
       {
         firstVisit: false,
-        page: "dashboard"
+        page: "dashboard",
+        currentFavourite
       },
       () => {
         this.fetchPrices();
@@ -87,7 +91,8 @@ class AppProvider extends Component {
     localStorage.setItem(
       "cryptoDash",
       JSON.stringify({
-        favourites: this.state.favourites
+        favourites: this.state.favourites,
+        currentFavourite
       })
     );
   };
@@ -99,8 +104,21 @@ class AppProvider extends Component {
       return { page: "settings", firstVisit: true };
     }
 
-    let { favourites } = JSON.parse(cryptoDashData);
-    return { favourites };
+    let { favourites, currentFavourite } = JSON.parse(cryptoDashData);
+    return { favourites, currentFavourite };
+  };
+
+  setCurrentFavourite = sym => {
+    let updatedCurrentFavourite = JSON.stringify({
+      ...JSON.parse(localStorage.getItem("cryptoDash")),
+      currentFavourite: sym
+    });
+
+    this.setState({
+      currentFavourite: sym
+    });
+
+    localStorage.setItem("cryptoDash", updatedCurrentFavourite);
   };
 
   setPage = pageName => this.setState({ page: pageName });
