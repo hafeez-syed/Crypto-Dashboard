@@ -32,7 +32,11 @@ const CoinGrid = ({ topSection }) => {
             favourites,
             filteredCoins
           ).map(coinKey => (
-            <CoinTile topSection={topSection} key={coinKey} coinKey={coinKey} />
+            <CoinTile
+              topSection={topSection}
+              key={`coin-tile${coinKey}`}
+              coinKey={coinKey}
+            />
           ))}
         </CoinGridStyled>
       )}

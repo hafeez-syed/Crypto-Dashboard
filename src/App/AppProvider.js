@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import cryptoCompare from "cryptocompare";
 import _ from "lodash";
+import moment from "moment";
+import { currency } from "../utils";
 export const AppContext = React.createContext();
 
 const MAX_FAVOURITES = 10;
-
+const TIME_UNITS = 10;
 class AppProvider extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ class AppProvider extends Component {
   componentDidMount = () => {
     this.fetchCoins();
     this.fetchPrices();
+    this.fetchHistorical();
   };
 
   addCoin = key => {
@@ -45,11 +48,12 @@ class AppProvider extends Component {
 
   prices = async () => {
     let returnData = [];
+    debugger;
     for (let i = 0; i < this.state.favourites.length; i++) {
       try {
         let priceData = await cryptoCompare.priceFull(
           this.state.favourites[i],
-          "AUD"
+          currency
         );
         returnData.push(priceData);
       } catch (e) {
@@ -58,6 +62,45 @@ class AppProvider extends Component {
     }
 
     return returnData;
+  };
+
+  historical = () => {
+    let promises = [];
+
+    for (let units = TIME_UNITS; units > 0; units--) {
+      promises.push(
+        cryptoCompare.priceHistorical(
+          this.state.currentFavourite,
+          [currency],
+          moment()
+            .subtract({ months: units })
+            .toDate()
+        )
+      );
+    }
+
+    return Promise.all(promises);
+  };
+
+  fetchHistorical = async () => {
+    if (this.state.firstVisit) {
+      return;
+    }
+
+    let results = await this.historical();
+    let historical = [
+      {
+        name: this.state.currentFavourite,
+        data: results.map((result, index) => [
+          moment()
+            .subtract({ months: TIME_UNITS - index })
+            .valueOf(),
+          result[currency]
+        ])
+      }
+    ];
+
+    this.setState({ historical });
   };
 
   fetchCoins = async () => {

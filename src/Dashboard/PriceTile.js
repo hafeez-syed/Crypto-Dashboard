@@ -2,13 +2,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { SelectableTile } from "../Shared/Tile";
 import { AppContext } from "../App/AppProvider";
+import { currency } from "../utils";
 
-import {
-  fontSize2,
-  fontSize3,
-  fontSizeBig,
-  greenBoxShadow
-} from "../Shared/Styles";
+import { fontSize3, fontSizeBig, greenBoxShadow } from "../Shared/Styles";
 import { CoinHeaderGridStyled } from "../Settings/CoinHeaderGrid";
 import { restrictDecimal } from "../utils";
 
@@ -45,6 +41,9 @@ const TickerPrice = styled.div`
 
 const ChangePercentage = styled.div`
   color: green;
+  &:after {
+    content: " %";
+  }
   ${props =>
     props.red &&
     css`
@@ -57,10 +56,6 @@ const CurrencyPrice = styled.div`
   grid-gap: 5px;
   grid-template-columns: 35px 1fr;
   margin-top: 10px;
-`;
-
-const Currency = styled.div`
-  ${fontSize2};
 `;
 
 const PercentageChange = ({ data }) => {
@@ -84,8 +79,7 @@ const Tile = ({ symbol, data, currentFavourite, setCurrentFavourite }) => {
         <PercentageChange data={data} />
       </CoinHeaderGridStyled>
       <CurrencyPrice>
-        <Currency>$AUD</Currency>
-        <TickerPrice>{restrictDecimal(data.PRICE)}</TickerPrice>
+        <TickerPrice>${restrictDecimal(data.PRICE)}</TickerPrice>
       </CurrencyPrice>
     </PriceTileStyled>
   );
@@ -105,15 +99,14 @@ const TileCompact = ({
     >
       <JustifyLeft>{symbol}</JustifyLeft>
       <PercentageChange data={data} />
-      <Currency>$AUD</Currency>
-      <TickerPrice>{restrictDecimal(data.PRICE)}</TickerPrice>
+      <TickerPrice>${restrictDecimal(data.PRICE)}</TickerPrice>
     </PriceTileStyled>
   );
 };
 
 const PriceTile = ({ price, index }) => {
   let symbol = Object.keys(price)[0];
-  let data = price[symbol]["AUD"];
+  let data = price[symbol][currency];
   let TileType = index < 5 ? Tile : TileCompact;
   return (
     <AppContext.Consumer>
