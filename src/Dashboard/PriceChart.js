@@ -12,7 +12,11 @@ const PriceChart = () => {
     <AppContext.Consumer>
       {({ historical }) => (
         <Tile>
-          <ReactHighcharts config={HighChartsConfig(historical)} />
+          {historical ? (
+            <ReactHighcharts config={HighChartsConfig(historical)} />
+          ) : (
+            <div>Loading Historical Data</div>
+          )}
         </Tile>
       )}
     </AppContext.Consumer>

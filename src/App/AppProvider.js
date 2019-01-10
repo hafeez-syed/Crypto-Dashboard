@@ -48,7 +48,6 @@ class AppProvider extends Component {
 
   prices = async () => {
     let returnData = [];
-    debugger;
     for (let i = 0; i < this.state.favourites.length; i++) {
       try {
         let priceData = await cryptoCompare.priceFull(
@@ -124,10 +123,13 @@ class AppProvider extends Component {
       {
         firstVisit: false,
         page: "dashboard",
-        currentFavourite
+        currentFavourite,
+        prices: null,
+        historical: null
       },
       () => {
         this.fetchPrices();
+        this.fetchHistorical();
       }
     );
 
@@ -143,7 +145,7 @@ class AppProvider extends Component {
   savedSettings = () => {
     let cryptoDashData = localStorage.getItem("cryptoDash");
 
-    if (!cryptoDashData) {
+    if (!cryptoDashData || _.isEmpty(cryptoDashData)) {
       return { page: "settings", firstVisit: true };
     }
 
@@ -157,9 +159,13 @@ class AppProvider extends Component {
       currentFavourite: sym
     });
 
-    this.setState({
-      currentFavourite: sym
-    });
+    this.setState(
+      {
+        currentFavourite: sym,
+        historical: null
+      },
+      this.fetchHistorical
+    );
 
     localStorage.setItem("cryptoDash", updatedCurrentFavourite);
   };
