@@ -1,6 +1,6 @@
 # CryptoDash
 
-CryptoDash is dashboard see the crypto currency market trends.
+CryptoDash is cryptocurrency dashboard to compare see the cryptocurrency market trends.
 
 ## Run the app
 
