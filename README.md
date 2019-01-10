@@ -2,18 +2,22 @@
 
 CryptoDash is dashboard see the crypto currency market trends.
 
-## Running
+## Run the app
 
-### `npm install` to install all the necessary dependencies. 
+To install all the necessary dependencies
+### `npm install`
 
-### `npm start` to run the application in development mode. Open <localhost:3000> in your browser to see the app running.
+To run the application in development mode.
+### `npm start`  
+
+Open <localhost:3000> in your browser to see the app running.
 
 ## Production Build
 
-### `npm run build` to create a `build` folder.
+To create a `build` folder
+### `npm run build`
 
 ## Screenshots
-
 
 ![](https://github.com/hafeez-syed/Crypto-Dashboard/blob/master/screenshots/settings.png)
 
