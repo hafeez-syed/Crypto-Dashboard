@@ -2,7 +2,7 @@ import React from "react";
 import ReactHighcharts from "react-highcharts";
 import { AppContext } from "../App/AppProvider";
 import { Tile } from "../Shared/Tile";
-import HighChartsConfig from "./HighchartsConfig";
+import HighchartsConfig from "./HighchartsConfig";
 import HighChartsTheme from "./HighchartsTheme";
 import ChartSelect from "./ChartSelect";
 
@@ -22,7 +22,7 @@ const PriceChart = () => {
             <option value="months"> Months </option>
           </ChartSelect>
           {historical ? (
-            <ReactHighcharts config={HighChartsConfig(historical)} />
+            <ReactHighcharts config={HighchartsConfig(historical)} />
           ) : (
             <div>Loading Historical Data</div>
           )}

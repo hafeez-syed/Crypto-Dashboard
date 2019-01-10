@@ -7,7 +7,7 @@ const Welcome = ({ firstVisit }) => {
       {({ firstVisit }) =>
         firstVisit ? (
           <div>
-            Welcome to CryptoDash, please select your favourite coins to begin.
+            Welcome to CryptoDash, please select 'and confirm' your favourite coins to begin.
           </div>
         ) : null
       }

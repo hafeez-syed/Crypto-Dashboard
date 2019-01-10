@@ -1,5 +1,4 @@
 language: node_js
-
 node_js:
   - stable
 cache:
@@ -10,7 +9,7 @@ script:
   - npm --version
 before_deploy:
   - npm install -g travis-ci-cloudfront-invalidation
-  - npm run build
+  - npm run prod
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY_ID

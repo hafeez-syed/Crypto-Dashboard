@@ -1,4 +1,4 @@
-const HighChartsConfig = historical => {
+const HighchartsConfig = historical => {
   return {
     title: {
       text: ""
@@ -45,4 +45,4 @@ const HighChartsConfig = historical => {
   };
 };
 
-export default HighChartsConfig;
+export default HighchartsConfig;

@@ -17,8 +17,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prod": "react-scripts build && sh script.sh crypto-dash",
+    "deploy-manual": "aws s3 cp --recursive build/ s3://hafeezsyed.com"
   },
+  "homepage": "/crypto-dash/",
+  "author": "Hafeez Syed",
+  "license": "MIT",
   "eslintConfig": {
     "extends": "react-app"
   },
